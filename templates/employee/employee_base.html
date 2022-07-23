@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}{% endblock %}</title>
+    <link
+      rel="icon"
+      href="{% static 'images/favicon.png' %}"
+      type="image/icon type"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+  </head>
+  <style></style>
+  <body>
+    <img src="{% static 'images/top.jpeg' %}" alt="" width="100%" />
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-success">
+      <div class="container">
+        <a href="{% url 'employee_home' %}" class="navbar-brand"
+          >వై ఎస్ ఆర్ రైతు భరోసా</a
+        >
+        <button
+          type="button"
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+            <a href="{% url 'employee_home' %}" class="nav-item nav-link"
+              >Home</a
+            >
+          </div>
+
+          {% if employee %}
+          <ul class="nav navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link {%block loginActive%}{%endblock%}"
+                >Hi, {{employee.emp_id}}</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                href="{% url 'index' %}"
+                class="nav-link {%block registerActive%}{%endblock%}"
+                >LogOut
+              </a>
+            </li>
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+    {% block content %} {% endblock %}
+    <div class="footer">
+      <p>
+        Copyrights &#169; Real Time Governance Society (RTGS), Government of
+        Andhra Pradesh contact @
+        <a href="mailto:mail.businessworks@gmail.com"
+          >mail.businessworks@gmail.com</a
+        >
+      </p>
+    </div>
+  </body>
+</html>

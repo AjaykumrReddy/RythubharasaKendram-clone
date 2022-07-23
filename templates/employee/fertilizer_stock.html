@@ -1,0 +1,24 @@
+{% extends 'employee/employee_base.html' %} {% load static %} {% block title %}
+వై ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+
+<link href="{% static 'css/emploee_stock_styles.css' %}" rel="stylesheet" />
+
+<div class="container">
+  <center>
+  <table>
+    <tr>
+      <th>S.No</th>
+      <th>Fertilizer</th>
+      <th>Stock Units</th>
+    </tr>
+    {% for stock in stocks %}
+    <tr>
+      <td>{{stock.id}}</td>
+      <td>{{stock.fertilizer_type}}</td>
+      <td>{{stock.stock_units}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</center>
+</div>
+{% endblock %}

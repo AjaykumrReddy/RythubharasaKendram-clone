@@ -1,0 +1,29 @@
+body {
+  font-family: "lato", sans-serif;
+}
+table{
+  width: 70%;
+  margin-top: 50px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: antiquewhite;
+  box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.3);
+}
+.footer{
+  position: fixed;
+  height: 30px;
+}
+th{
+  background-color: burlywood;
+  height: 50px;
+  border-radius: 5px;
+}
+td{
+  height: 40px;
+}
+@media screen and (max-width: 600px) {
+  table{
+    width: 90%;
+
+  }
+}

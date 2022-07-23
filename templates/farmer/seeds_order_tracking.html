@@ -1,0 +1,175 @@
+{% extends 'farmer/farmer_base.html' %} {% load static %} {% block title %}వై
+ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+/>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+  .footer {
+    position: fixed;
+  }
+  .containers {
+    margin-top: 20px;
+  }
+  .formContainer {
+    
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  #tracking_id {
+    width: 300px;
+  }
+  button {
+    height: 50px;
+    width: 120px;
+    background-color: rgb(72, 155, 72);
+    color: rgb(245, 248, 245);
+    font-size: large;
+    font-weight: bold;
+    border-radius: 8px;
+    border-color: rgb(212, 219, 224);
+  }
+  button:hover {
+    background-color: transparent;
+    color: green;
+  }
+  /* start tracking style */
+  table {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .rl {
+    border-right: 2px solid rgb(180, 180, 139);
+  }
+  label {
+    font-style: oblique;
+    color: rgb(180, 180, 139);
+  }
+
+  /* end tracking style  */
+</style>
+<div class="containers">
+  <center>
+    <strong>Track your seed Order</strong>
+    {% if error %}
+    <h5 class="text-danger">Invalid Tracking ID</h5>
+    {% endif %}
+    <div class="formContainer">
+      <form action="{% url 'seeds_order_tracking' %}" method="POST">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="tracking_id"
+          id="tracking_id"
+          placeholder="Enter Tracking Id"
+        />
+        <button type="submit">Track</button>
+      </form>
+    </div>
+  </center>
+</div>
+<!-- Tracking Model  -->
+{% if context %}
+<div
+  class="modal fade"
+  id="exampleModalLong"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          {{context.seeds_order_tracking.seed_type}} ,
+          {{context.seeds_order_tracking.no_of_packets}} Units <br />
+          Tracking Id: {{context.seeds_order_tracking.tracking_id}}
+        </h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <!-- delivered  -->
+        {% if context.delivered_at %}
+        <label>{{context.delivered_at.date}}</label>
+        <table>
+          <tr>
+            <td class="rl">{{context.delivered_at.time}}</td>
+            <td>Order Delivered Successfully</td>
+          </tr>
+        </table>
+        {% endif %}
+        <!-- Out of Delivery  -->
+        {% if context.outOfDelivery_at %} 
+        {% if context.outOfDelivery_at.date != context.delivered_at.date %}
+        <label>{{context.outOfDelivery_at.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.outOfDelivery_at.time}}</td>
+            <td>Order is Ready to Delivery</td>
+          </tr>
+        </table>
+        {% endif %} 
+        <!-- Shipped  -->
+        {% if context.shipped_at %} 
+        {% if context.shipped_at.date != context.outOfDelivery_at.date %}
+        <label>{{context.shipped_at.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.shipped_at.time}}</td>
+            <td>Your Item has been Shipped</td>
+          </tr>
+        </table>
+        {% endif %} 
+        <!-- picked Up  -->
+        {% if context.pickedUp_at %} 
+        {% if context.pickedUp_at.date != context.shipped_at.date %}
+        <label>{{context.pickedUp_at.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.pickedUp_at.time}}</td>
+            <td>Carrier picked up package</td>
+          </tr>
+        </table>
+        {% endif %}
+        <!-- processed  -->
+        {% if context.processed_at %} 
+        {% if context.processed_at.date != context.pickedUp_at.date %}
+        <label>{{context.processed_at.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.processed_at.time}}</td>
+            <td>Order processed by Seller</td>
+          </tr>
+        </table>
+        {% endif %}
+        <!-- Order placed  -->
+        {% if context.seeds_order_tracking.date.date != context.processed_at.date %}
+        <label>{{context.seeds_order_tracking.date.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.seeds_order_tracking.date.time}}</td>
+            <td><b>Seeds Ordered</b><br />Your Order has been Placed.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<script>
+  $(document).ready(function () {
+    $("#exampleModalLong").modal("show");
+  });
+</script>
+
+{% endblock %}

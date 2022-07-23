@@ -1,0 +1,95 @@
+{% extends 'employee/employee_base.html' %} {% load static %} {% block title %}
+వై ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+
+    <!-- login details -->
+    <section id="about">
+        <div class="alert alert-light mx-3" role="alert" id="alerttest">
+          <h5 class="text-center fw-bold title_"><span id="alert" class="alert_"> <h1> Performance Tracking of Employee </h1></span></h5>
+        </div>
+
+    <hr class="featurette-divider">
+    <div class="container px-4">
+      <div class="row gx-5">
+        <div class="col">
+          <div class="p-3 border bg-light">
+
+            <div class="row featurette">
+              <div class="col-md-7 order-md-2">
+               
+                  <div class="alert alert-light " id="alerttest1">
+                    <h2 class="text-center fs-4 abouttitle "><span id="alert1"> <h2> Monthly performance of Employee</h2></span></h2>
+                  </div>
+                
+                </h2>
+                <p class="lead">
+                  <span class="fs-5">
+                    <h3>January : Poor</h3>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h3>February : Fair</h3>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h3>March : Average</h3>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h3>April : Good </h3>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h3>May : Excellent</h3>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <h3>June : Average</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    <h3>July : Good</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    <h3>August : Poor</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    <h3>September : Excellent</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    <h3>October : Average</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    <h3>November : Fair</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    <h3>December : Good</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                </span>
+              </div>
+              <div class="col-md-5">
+                <img src="{% static 'images/employee.jpeg' %}" class="img-thumbnail" alt="...">
+                <table>
+                    <tr>
+                      <td>Name </td>
+                      <td>: {{employee.name}}</td>
+                    </tr>
+                    <tr>
+                      <td>Id  </td>
+                      <td>: {{employee.emp_id}}</td>
+                    </tr>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

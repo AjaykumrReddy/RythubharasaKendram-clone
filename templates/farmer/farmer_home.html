@@ -1,0 +1,128 @@
+{% extends 'farmer/farmer_base.html' %} {% load static %} {% block title %}వై
+ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+<style>
+  :root {
+    --gradient: linear-gradient(
+      to left top,
+      green  30%,
+      orangered 70%
+    ) !important;
+  }
+
+  body {
+    background: #111 !important;
+  }
+</style>
+<div class="container mx-auto mt-4">
+  {% if tracking_id %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Oredred successfully..!</strong>
+    Here is your Tracking Id : <strong> {{tracking_id}}</strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %} {% if feedback %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Thanks for Your Feedback..!</strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endif %}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{% static 'images/soil.jpg' %}"
+          height="190px"
+          width="286px"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Soil</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Soil test Slot Booking and Tracking
+          </h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="{% url 'soil_test_slot_booking' %}" class="btn mr-2"
+            ><i class="fas fa-link"></i>Book</a
+          >
+          <a href="{% url 'soil_test_tracking' %}" class="btn"
+            ><i class="fab fa-github"></i> Track</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{% static 'images/seed.jpg' %}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Seed</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Seeds Ordering & Tracking
+          </h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a
+            href="{% url 'seeds_ordering' %}?farmer={{farmer.user_id}}"
+            class="btn mr-2"
+            ><i class="fas fa-link"></i> Order</a
+          >
+          <a
+            href="{% url 'seeds_order_tracking' %}?farmer={{farmer.user_id}}"
+            class="btn"
+            ><i class="fab fa-github"></i> Track</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{% static 'images/fertilizer1.jpeg' %}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Fertilizers</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Order Fertilizers and Tracking
+          </h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a
+            href="{% url 'ordering_fertilizers' %}?farmer={{farmer.user_id}}"
+            class="btn mr-2"
+            ><i class="fas fa-link"></i>Order</a
+          >
+          <a
+            href="{% url 'fertilizers_tracking' %}?farmer={{farmer.user_id}}"
+            class="btn"
+            ><i class="fab fa-github"></i>Track
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends 'employee/employee_base.html' %} {% load static %} {% block title %}
+వై ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+<style>
+.footer {
+    position: fixed;
+  }
+
+  .formContainer {
+    width: 30%;
+    margin-top: 20px;
+  }
+button {
+    height: 40px;
+    width: 120px;
+    background-color: rgb(72, 155, 72);
+    color: rgb(245, 248, 245);
+    font-size: large;
+    font-weight: bold;
+    border-radius: 8px;
+    border-color: rgb(212, 219, 224);
+  }
+  button:hover {
+    background-color: transparent;
+    color: green;
+  }
+  table{
+    width: 60%;
+    margin-top: 30px;
+
+  }
+  @media screen and (max-width: 600px) {
+
+  .formContainer {
+    width: 70%;
+  }
+  table{
+    width: 95%;
+
+  }
+}
+</style>
+<div class="container">
+    <center>
+        <div class="formContainer">
+        <form action="{% url 'soiltest_reports' %}">
+            <select name="soil_type" id="soil_type">
+                <option value="Red-soil">Red soil</option>
+                <option value="Black-soil">Black soil</option>
+                <option value="Deltaic-alluvial-soil">Deltaic alluvial soil</option>
+                <option value="Coastal-alluvial-soil">Coastal alluvial soil</option>
+                <option value="Laterite-soil">Laterite soil</option>
+                <option value="Skeletal-Soil">Skeletal Soil</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    {% if soiltest_requests %}
+    
+    <table>
+        <tr>
+            <th>Farmer Name</th>
+            <th>Staus</th>
+            <th>Tracking Id</th>
+        </tr>
+        {% for soiltest_request in soiltest_requests %}
+        <tr>
+            <td>{{soiltest_request.name}}</td>
+            <td>{{soiltest_request.status}}</td>
+            <td><a href="{% url 'submit_soiltest_report' %}?tracking_id={{soiltest_request.tracking_id}}">{{soiltest_request.tracking_id}}</a></td>
+        </tr>
+
+        {% endfor %}
+
+
+    </table>
+    {% endif %}
+    </center>
+
+</div>
+{% endblock %}

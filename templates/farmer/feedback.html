@@ -1,0 +1,56 @@
+{% extends 'farmer/farmer_base.html' %} {% load static %} {% block title %}వై
+ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block feedbackActive%} active
+{%endblock%}{%block content%}
+<style>
+  .footer {
+    position: fixed;
+  }
+  form {
+    width: 70%;
+  }
+  button {
+    margin-top: 15px;
+    background-color: green;
+    color: aliceblue;
+    width: 80px;
+    height: 40px;
+    font-weight: bold;
+    font-style: oblique;
+  }
+  button:hover {
+    background-color: transparent;
+    color: black;
+  }
+</style>
+<div class="container" style="padding-top: 50px">
+  <center>
+    <form action="{% url 'feedback' %}" method="POST">
+      {% csrf_token %}
+      <select
+        class="form-select"
+        name="feedback_name"
+        aria-label="Default select example"
+        required
+      >
+        <!-- <option selected>Choose Feedback Category...</option> -->
+        <option value="suggestion">Suggestion</option>
+        <option value="complaint">Complaint</option>
+        <option value="about_Site">Something About Site</option>
+        <option value="compliment">Compliment</option>
+        <option value="others">Others</option>
+      </select>
+      <div class="form-floating" style="padding-top: 10px">
+        <textarea
+          class="form-control"
+          placeholder="please leave your feedback here..."
+          name="feedback_desc"
+          style="height: 100px"
+          required
+        ></textarea>
+        <label>Please leave your feedback here...</label>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </center>
+</div>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'farmer/farmer_base.html' %} {% load static %} {% block title %}వై
+ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+/>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+  .footer {
+    position: fixed;
+  }
+  .containers {
+    margin-top: 20px;
+  }
+  .formContainer {
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  #tracking_id {
+    width: 300px;
+  }
+  button {
+    height: 50px;
+    width: 120px;
+    background-color: rgb(72, 155, 72);
+    color: rgb(245, 248, 245);
+    font-size: large;
+    font-weight: bold;
+    border-radius: 8px;
+    border-color: rgb(212, 219, 224);
+  }
+  button:hover {
+    background-color: transparent;
+    color: green;
+  }
+  /* start tracking style */
+  table {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .rl {
+    border-right: 2px solid rgb(180, 180, 139);
+  }
+  label {
+    font-style: oblique;
+    color: rgb(180, 180, 139);
+  }
+
+  /* end tracking style  */
+</style>
+<div class="containers">
+  <center>
+    <strong>Track your Soil test</strong>
+    {% if error %}
+    <h5 class="text-danger">Invalid Tracking ID</h5>
+    {% endif %}
+    <div class="formContainer">
+      <form action="{% url 'soil_test_tracking' %}" method="POST">
+        {% csrf_token %}
+        <input
+          type="text"
+          name="tracking_id"
+          id="tracking_id"
+          placeholder="Enter Tracking Id"
+        />
+        <button type="submit">Track</button>
+      </form>
+    </div>
+  </center>
+</div>
+
+{% if context %}
+<div
+  class="modal fade"
+  id="exampleModalLong"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          {{context.soil_test_tracking.soil_type}} <br />
+          Tracking Id: {{context.soil_test_tracking.tracking_id}}
+        </h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <!-- Result  -->
+        {% if context.result_at %}
+        <label>{{context.result_at.date}}</label>
+        <table>
+          <tr>
+            <td class="rl">{{context.result_at.time}}</td>
+            {% if test_report %}
+            <td>Download Your  Reports <a href="{{test_report.url}}">here</a> </td>
+            {% else %}
+            <td><b>Soil test Completed</b><br>Test Result Will Upload Soon</td>
+            {% endif %}
+          </tr>
+        </table>
+        {% endif %} 
+        <!-- Slot Alloted  -->
+        {% if context.slotAlloted_at %} 
+        {%if context.slotAlloted_at.date != context.result_at.date %}
+        <label>{{context.slotAlloted_at.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.slotAlloted_at.time}}</td>
+            <td>Slot Alloted Successfully for test</td>
+          </tr>
+        </table>
+        {% endif %} 
+        <!-- Accepted  -->
+        {% if context.accepted_at %} 
+        {% if context.accepted_at.date != context.slotAlloted_at.date %}
+        <label>{{context.accepted_at.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.accepted_at.time}}</td>
+            <td>Request For Soil test Accepted</td>
+          </tr>
+        </table>
+        {% endif %} 
+        <!-- processed  -->
+        {% if context.processed_at %} 
+        {% if context.processed_at.date != context.accepted_at.date %}
+        <label>{{context.processed_at.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.processed_at.time}}</td>
+            <td>Request processed by Officer.</td>
+          </tr>
+        </table>
+        {% endif %} 
+        <!-- Soil Test Request  -->
+        {% if context.soil_test_tracking.date.date != context.processed_at.date %}
+        <label>{{context.soil_test_tracking.date.date}}</label>
+        {% endif %}
+        <table>
+          <tr>
+            <td class="rl">{{context.soil_test_tracking.date.time}}</td>
+            <td><b>Request For Soil test</b><br />Your Request has been Placed.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<script>
+  $(document).ready(function () {
+    $("#exampleModalLong").modal("show");
+  });
+</script>
+
+{% endblock %}

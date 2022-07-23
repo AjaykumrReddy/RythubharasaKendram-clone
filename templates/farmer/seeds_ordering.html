@@ -1,0 +1,53 @@
+{% extends 'farmer/farmer_base.html' %} {% load static %} {% block title %}వై ఎస్ ఆర్ రైతు
+భరోసా{%endblock%} {%block content%}
+<style>
+  .form {
+    background-color: beige;
+    padding: 2em 2em 5em 2em;
+    margin: 5px 10%;
+    border-radius: 10px;
+  }
+  #id_address {
+    height: 40px;
+  }
+  .submitButton {
+    align-self: flex-start;
+  }
+  label[for="id_tracking_id"] {
+    display: none;
+}
+  label[for="id_date"] {
+    display: none;
+}
+</style>
+<div class="container" style="padding-top: 5em; padding-bottom: 2em">
+  <center>
+    <h6>Order Seeds</h6>
+  </center>
+  <div class="form">
+    <form method="POST" action="{% url 'seeds_ordering' %}">
+    {% if exception %}
+    <h6>{{exception}}</h6>
+    {% endif %}
+      {% csrf_token %} {{ form.as_table }}
+     
+    </br>
+      <input type="submit" class="submitButton" value="submit" />
+    </form>
+  </div>
+</div>
+<script>
+  function randomNumber(len) {
+  var randomNumber;
+  var n = '';
+
+  for (var count = 0; count < len; count++) {
+    randomNumber = Math.floor(Math.random() * 10);
+    n += randomNumber.toString();
+  }
+  return n;
+}
+
+document.getElementById("id_tracking_id").value = randomNumber(16);
+</script>
+{% endblock %}

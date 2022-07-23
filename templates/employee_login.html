@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% load static %} {% block title %}వై ఎస్ ఆర్ రైతు
+భరోసా{%endblock%} {%block loginActive%} active {%endblock%} {%block content%}
+<style>
+  .footer {
+    position: fixed;
+  }
+</style>
+<div class="fromContainer">
+  {% if msg %}
+  <h5>Invalid User Id or Password</h5>
+  {% endif %}
+  <form action="{% url 'employee_login' %}" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-25">
+        <label for="lname">Employee Id</label>
+      </div>
+      <div class="col-75">
+        <input
+          type="text"
+          id="emp_id"
+          name="emp_id"
+          placeholder="Your Employee Id"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="country">Password</label>
+      </div>
+      <div class="col-75">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Your password"
+          required
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-50">
+        <input type="submit" value="Login" />
+      </div>
+      <div class="col-50">
+        <input type="reset" value="Reset" />
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

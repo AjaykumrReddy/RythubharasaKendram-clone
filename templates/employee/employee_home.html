@@ -1,0 +1,98 @@
+{% extends 'employee/employee_base.html' %} {% load static %} {% block title %}
+వై ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+<style>
+  :root {
+    --gradient: linear-gradient(
+      to left top,
+      green  20%,
+      orangered 80%
+    ) !important;
+  }
+
+  body {
+    background: #111 !important;
+  }
+</style>
+<div class="container mx-auto mt-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{% static 'images/TaskPerformance.jpg' %}"
+          height="190px"
+          width="286px"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Task & Performance</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Daily Tasks and your Performance
+          </h6>
+          <p class="card-text">
+            Task performance describes the core job responsibilities of an employee. 
+            It is also called "in-role prescribed behavior".
+          </p>
+          <a href="{% url 'employee_tasks' %}" class="btn mr-2"
+            ><i class="fas fa-link"></i>Tasks</a
+          >
+          <a href="{% url 'employee_performance' %}" class="btn"
+            ><i class="fab fa-github"></i> Performance</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{% static 'images/fertilizerStock.jpg' %}"
+          class="card-img-top"
+          alt="..."
+          height="190px"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Stock Update</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Fertilizers and seed Stock Update
+          </h6>
+          <p class="card-text">
+            verify the Stock of Fertilizers and Seeds.
+            If any of Stock is low inform to admin.
+            Admin can only Update Stock.
+          </p>
+          <a href="{% url 'fertilizer_stock' %}" class="btn mr-2"
+            ><i class="fas fa-link"></i>Fertilizer</a
+          >
+          <a href="{% url 'seed_stock' %}" class="btn"
+            ><i class="fab fa-github"></i> Seeds</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{% static 'images/soilSeedTesting.jpg' %}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Test Reports</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            Soil test Reports
+          </h6>
+          <p class="card-text">
+            Check all the Soil test Requests from farmers.
+            And Upload the Result of Soil Tests as soon as possible.
+          </p>
+    
+          <a href="{% url 'soiltest_reports' %}" class="btn"
+            ><i class="fab fa-github"></i>Soil Test Requests
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

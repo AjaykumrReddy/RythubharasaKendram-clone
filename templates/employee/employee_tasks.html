@@ -1,0 +1,73 @@
+{% extends 'employee/employee_base.html' %} {% load static %} {% block title %}
+వై ఎస్ ఆర్ రైతు భరోసా{%endblock%} {%block content%}
+<style>
+  .footer {
+    position: fixed;
+    height: 30px;
+  }
+</style>
+<div class="container">
+  <center>
+    <div class="alert alert-light mx-3" role="alert" id="alerttest">
+      <h5 class="text-center fw-bold title_">
+        <span id="alert" class="alert_"> <h1>Daily Tasks</h1></span>
+      </h5>
+    </div>
+    <hr class="featurette-divider" />
+    <div class="container px-4">
+      <div class="row gx-5">
+        <div class="col">
+          <div class="p-3 border bg-light">
+            <div class="row featurette">
+              <div class="col-md-7 order-md-2">
+                <div class="alert alert-light" id="alerttest1">
+                  <h2 class="text-center fs-4 abouttitle">
+                    <span id="alert1"> <h2>Tasks</h2></span>
+                  </h2>
+                </div>
+                {% for task in tasks %}
+                <p class="lead">
+                  <span class="fs-5">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckDefault"
+                      />
+                      <label class="form-check-label" for="flexCheckDefault">
+                        <h4>{{task.title}}</h4>
+                        <p>{{task.desc}}</p>
+                      </label>
+                    </div>
+                  </span>
+                </p>
+                <hr />
+                {% endfor %}
+              </div>
+              <div class="col-md-5" style="margin-bottom: 20px">
+                <img
+                  src="{% static 'images/employee.jpeg' %}"
+                  class="img-thumbnail"
+                  alt="..."
+                />
+                <table>
+                  <tr>
+                    <td>Name : </td>
+                    <td>{{employee.name}}</td>
+                  </tr>
+                  <tr>
+                    <td>Id : </td>
+                    <td>{{employee.emp_id}}</td>
+                  </tr>
+                </table>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </center>
+</div>
+{% endblock %}
