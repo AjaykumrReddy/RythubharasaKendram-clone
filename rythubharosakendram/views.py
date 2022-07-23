@@ -66,11 +66,13 @@ def farmer_login(request):
         user_id = request.POST.get('user_id')
         password = request.POST.get('password')
         try:
+            print(f"Login {user_id} password {password}")
             farmer = FarmerRegistrationModel.objects.get(
                 user_id=user_id, password=password)
             request.session['farmer_user_id'] = user_id
             return render(request, 'farmer/farmer_home.html', {'farmer': farmer})
         except Exception as e:
+            print(e)
             return render(request, 'farmer_login.html', {'msg': e})
     else:
         return render(request, 'farmer_login.html')
