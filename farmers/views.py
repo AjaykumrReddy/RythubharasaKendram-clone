@@ -113,8 +113,12 @@ def soil_test_tracking(request):
             try:
                 test_report = SoilTestReports.objects.filter(
                     tracking_id=tracking_id)
-                test_report = test_report.last().test_reports
+                if test_report:
+                    test_report = test_report.last().test_reports
+                else:
+                    test_report = None
             except Exception as e:
+                print(e)
                 return render(request, 'farmer/soil_test_tracking.html', {'farmer': farmer, 'tracking_id': tracking_id, 'error': e})
             return render(request, 'farmer/soil_test_tracking.html',  {'farmer': farmer, 'context': context, 'test_report': test_report})
         except Exception as e:
