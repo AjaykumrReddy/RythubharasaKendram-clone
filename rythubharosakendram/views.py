@@ -89,9 +89,9 @@ def employee_login(request):
                 request.session['employee_emp_id'] = emp_id
                 return render(request, 'employee/employee_home.html', {'employee': employee})
             else:
-                return render(request, 'employee_login.html', {'msg': 'Your account not yet activated'})
+                return render(request, 'employee_login.html', {'msg': 'Your account not yet activated by Admin'})
         except Exception as e:
-            return render(request, 'employee_login.html', {'msg': e})
+            return render(request, 'employee_login.html', {'msg': 'Invalid LoginId or Password'})
     else:
         return render(request, 'employee_login.html')
 

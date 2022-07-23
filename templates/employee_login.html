@@ -7,7 +7,7 @@
 </style>
 <div class="fromContainer">
   {% if msg %}
-  <h5>Invalid User Id or Password</h5>
+  <h5>{{msg}}</h5>
   {% endif %}
   <form action="{% url 'employee_login' %}" method="POST">
     {% csrf_token %}
